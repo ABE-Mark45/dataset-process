@@ -30,7 +30,7 @@ for img_path in img_files:
     xmax = int(file.getElementsByTagName('xmax')[0].firstChild.data)
     ymin = int(file.getElementsByTagName('ymin')[0].firstChild.data)
     ymax = int(file.getElementsByTagName('ymax')[0].firstChild.data)
-
+    label = file.getElementsByTagName('name')[0].firstChild.data
     print(f'H: {H}, W: {W}')
 
     s = 1
@@ -66,7 +66,7 @@ for img_path in img_files:
         elif k == ord('q'):
             cv2.imwrite('./new_images/'+img_path, img[y_pos:y_pos+256, x_pos:x_pos+256])
             data_file = open('./new_annotations/'+img_path.split('.')[0]+'.txt', 'w')
-            data_file.write(f'{scaled_xmin-x_pos},{scaled_ymin-y_pos},{scaled_xmax-x_pos},{scaled_ymax-y_pos}')
+            data_file.write(f'{scaled_xmin-x_pos},{scaled_ymin-y_pos},{scaled_xmax-x_pos},{scaled_ymax-y_pos}\n{label}')
             data_file.close()
             break
         elif k == ord('o'):
